@@ -1,6 +1,6 @@
 # Documenting Invariants
 
-Part of the work that we do at TC39 is ensuring that as the language changes, certain properties of the language remain. We have been referring to them as invariants. Some of them are [written down](https://tc39.es/ecma262/#sec-invariants-of-the-essential-internal-methods), but not all of them. The work around maintaining unwritten invariants usually falls onto a single member or delegate, whose participation or lack-there-of may result in certain decisions being taken that then need to be adjusted.
+Part of the work that we do at TC39 is ensuring that as the language changes, certain properties of the language remain. We have been referring to them as invariants. Some of them are [written down](https://tc39.es/ecma262/#sec-invariants-of-the-essential-internal-methods), but not all of them. The work around maintaining unwritten invariants usually falls onto a single member or delegate, whose absence may result in certain decisions being taken that then need to be adjusted.
 
 The goal of this repository is to define a format in which invariants can be introduced into the specification. So far, we have discussed the following as important features.
 
