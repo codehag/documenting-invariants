@@ -7,7 +7,7 @@ The goal of this repository is to define a format in which invariants can be int
 ## Features of an invariant
 
 * Is normative text. If the specification is out of step with an invariant, the spec is considered buggy. 
-* Specifies a rationale -- Invariants, ironically, [change](examples/abandoned_invariants.md). In order to be able to track why an invariant exists, and make a measured decision on its continued existance, we need to know why it is there. By specifying the rationale and keeping it up to date, we can identify if an invariant is still important or not.
+* Specifies a rationale -- Invariants, ironically, [change](/examples/abandoned_invariants.md). In order to be able to track why an invariant exists, and make a measured decision on its continued existance, we need to know why it is there. By specifying the rationale and keeping it up to date, we can identify if an invariant is still important or not.
 * Uses _must_ langauge if the invariant applies in all cases
 * Uses _should_ if the invariant applies in most cases, but there are clear cases where the invariant does not apply. This may be an implementation limitation, or something similar. In this case, the reasons should be listed and kept up to date.
 * has an associated Test262 integration test. 
