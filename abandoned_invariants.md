@@ -55,7 +55,7 @@ instanceOf operator used to be a reliable way to .
 
 ## Breakage
 
-Introduction of symbols.
+Introduction of `Symbol.hasInstance`.
 
 ### Specification Details
 
@@ -73,11 +73,11 @@ TODO
 
 ### Description
 
-toString used to be a brand check.
+toString used to be a brand check. That `Symbol.toStringTag` would remove this invariant  was discussed immediately prior to ES6, and since all builtin types (or so we thought, at the time) had a prototype method that brand-checked and threw an exception, this was deemed sufficient for all future types - in other words, a new invariant was added at that time, that every builtin type must have a means by which it can be brand-checked, even if indirectly. The Error types remain the only (overlooked at the time) builtin types for which this does not hold.
 
 ### Breakage
 
-Introduction of symbols.
+Introduction of `Symbol.toStringTag`.
 
 ### Specification Details
 
