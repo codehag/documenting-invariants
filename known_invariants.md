@@ -6,9 +6,6 @@ The purpose of this document is to collect invariants that we know.
 
 ## Hazard of "Exotic" internal slots
 
-### Category
-"Should"
-
 ### Definitions
 
 **Exotic internal slots** Similar to Exotic and Ordinary Objects in the spec. Any slot that is not in the defined ordinary object,
