@@ -138,6 +138,34 @@ TODO
 
 To maintain the ability to be Forward Compatible
 
+## Application of Non-determinism
+
+### Description: A long, full description of the invariant and it's purpose
+
+We designed the WeakMap, WeakRef split from the beginning to separate the deterministic economizing on space from the non-deterministic observability of GC decisions. [1][2][3][4]
+
+The non-determinism of WeakRefs present a *severe* problem that postponed their adoption until WASM. Any program making use of WeakRefs might contain a bug that never happens under exhaustive testing, but then does in production because of an unrelated change.
+
+Any non-deterministically enumerable weak collection presents *exactly* the same hazard. Thus, any such non-deterministic abstraction should be used with great caution, and clearly separated from abstractions intended for normal use.
+
+The co-existence of WASM and JS forced us to face the problem of acyclic GC across the boundary between the two systems. This was compelling enough that the browser makers were willing to eat the non-determinism hazard. Only then could WeakRefs advance.
+
+JS may be unique among languages in that even the enumeration order of Maps and Sets is deterministic --- not dependent on non-deterministic identity hashes, and not even exposing the non-deterministic identity hashes themselves.
+
+### Specification Details: Which specifications are affected by this invariant
+
+
+### Documentation
+
+[1]: https://web.archive.org/web/20160731015502/http://wiki.ecmascript.org/doku.php?id=harmony:weak_maps
+[2]: https://web.archive.org/web/20160306175520/http://wiki.ecmascript.org/doku.php?id=strawman:weak_refs
+[3]: https://web.archive.org/web/20160402121406/http://wiki.ecmascript.org/doku.php?id=strawman:weak_references
+[4]: https://web.archive.org/web/20160402121406/http://wiki.ecmascript.org/doku.php?id=strawman:weak_references#a_weakvaluemap
+
+
+### Rationale : Why did we have this invariant?
+
+TODO
 
 ----
 
