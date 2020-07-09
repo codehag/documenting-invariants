@@ -74,6 +74,71 @@ There are a few, but those violations preserve practical transparency.
 ### Rationale
 **!!TODO!!**: Membrane practical transparency -- which we have for...
 
+## Right of first access.
+
+
+### Description: A long, full description of the invariant and it's purpose
+If you attach handlers/get access to a value first, you have the "right of first access".
+
+Promises not being synchronously inspected. Violated by both the web and node for inspection/debugging tooling. We have no prose stating this, this is a constraint on all future APIs, not current APIs. In the Promises A+ spec -- they took the stance that promises should mitigate Zalgo (reacting either eagerly and synchronously if resolved *or* waiting asynchronously if pending). Promises always react in the same order that you attach handlers. The concern was that otherwise the handler could perform operations before another handler was attached, you no longer have first in - first out ordering for handlers. This was seen as a way of preempting.
+
+```js
+a.then(foo)
+// something between, a resolves in that time
+a.then(bar)
+```
+
+No longer guaranteed that foo executes before bar since `a` could resolve before attaching bar and if bar executed synchronously it would execute before foo. This leads to conversations like: if you can obtain a builtin module and add a handler that mutates the module (E.G. to polyfill an export), then the handler will fire first before any other handler can reference the mutable state. It doesn't matter if the mutation is synchronous then because all access must occur after the mutation.
+
+### Specification Details: Which specifications are affected by this invariant
+
+TODO
+
+### Rationale: Why did we have this invariant?
+Enables polyfils
+
+## Protecting Polyfillability
+
+Term to be defined: New Language Semantics
+
+### Description: A long, full description of the invariant and it's purpose
+Why: Polyfills allow implementation as long as no new language semantics are required. Allows the use of future features in old code.
+2000--2015: syntax didn’t change very much
+Now, it's not as important due to focus on syntax in recent years.
+The difficulty in passing APIs in the committee has resulted in passing more syntax.
+Less viable now that committee uses syntax more than APIs. Syntax requires ahead of time tooling unlike polyfills.
+See builtin modules.
+
+Discussion over time: A JS Programmer doesn’t have as much control of the runtime in which their code runs in compared to other languages. We are tailoring towards older run times to have first class support from committee proposals. We are not designing just for the current language, but also for older versions of the specification. The version we design down to is the oldest browser version that is currently active. We go back to 2016 (ie 11) (some would argue for ie 7 or es3).
+
+Design constraints from other environments: Node, other environments. Need delegation here. Example: Import.maps exist on the web and a similar capability is in node. Unclear if polyfilling can be done using them. We rely on solving language issues within the language, we don’t have a way to state that certain invariants are not mandated to be within scope of our work.
+
+### Specification Details: Which specifications are affected by this invariant
+
+TODO
+
+### Rationale: Why did we have this invariant?
+
+Enables supporting the specification up to a specific version (unclear which). The spec is backwards
+compatible with itself.
+
+# Precedents
+
+## Enforcement of the order of evaluation of the module graph for modules.
+
+### Description : A long, full description of the invariant and it's purpose
+
+A host is always allowed to run operations on a job queue, regardless of the host hooks provided by JS the language. In 2017, november, the question was if node was allowed to reorder the module graph so that all commonjs modules evaluate before all js Modules evaluate (this would have allowed named exports to be created for those modules) was brought to the committee because it was strange to change the order of evaluation. The spec does not have a prohibition, but the spec is unable to prohibit it. It Cannot be considered an invariant, but it is a design intent. The clear result was a desire to not ensure forward compatibility guarantees if re-ordering as an approach was taken.
+
+### Specification Details : Which specifications are affected by this invariant
+
+TODO
+
+### Rationale : Why did we have this invariant?
+
+To maintain the ability to be Forward Compatible
+
+
 ----
 
 Template
