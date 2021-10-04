@@ -2,6 +2,12 @@
 
 The purpose of this document is to collect invariants that we know.
 
+## Built-in objects must provide brand checks
+
+Prior to ES6, `Object.prototype.toString.call` was used as a brand-checking mechanism. Rather than remove `Symbol.toStringTag` from the imminent ES2015 edition ([notes](https://github.com/tc39/notes/blob/8711614630f631cb51dfb803caa087bedfc051a3/meetings/2015-01/jan-28.md#45-tostringtag)), the committee agreed (although unfortunately this was not captured in the notes) that as long as builtins offered a method (prototype or static) that checked internal slots, and threw an exception when the internal slots were not found, this would suffice as a brand check.
+
+<sub>The only exception to this, unknown at the time, is Error (and associated Error subclasses) - `Error.isError` was [proposed](https://github.com/tc39/notes/blob/8711614630f631cb51dfb803caa087bedfc051a3/meetings/2016-03/march-29.md#erroriserror) to fix this, but rejected in favor of brand checks inside the [stacks proposal](https://github.com/tc39/proposal-error-stacks).</sub>
+
 # Known Landmines, "shoulds"
 
 ## Hazard of "Exotic" internal slots
