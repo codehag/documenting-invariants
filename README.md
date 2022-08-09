@@ -12,7 +12,7 @@ The goal of this repository is to define a format in which invariants can be int
 * Uses _should_ if the invariant applies in most cases, but there are clear cases where the invariant does not apply. This may be an implementation limitation, or something similar. In this case, the reasons should be listed and kept up to date.
 * has an associated Test262 integration test. 
 
-Please open an issue or a pull requset if you see something missing here.
+Please open an issue or a pull request if you see something missing here.
 
 Known invariants are collected [here](./known_invariants.md).
 
