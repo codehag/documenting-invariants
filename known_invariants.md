@@ -1,16 +1,27 @@
 # Known Invariants, "musts"
 
-The purpose of this document is to collect invariants that we know. These are not "agreed"
-invariants. Those need to be discussed and integrated in the spec.
+The purpose of this document is to collect invariants that we know.  These are not "agreed" invariants. Those need to be discussed and integrated in the spec.
 
 ## Built-in objects must provide brand checks
 
+### Description
+
 Prior to ES6, `Object.prototype.toString.call` was used as a brand-checking mechanism. Rather than remove `Symbol.toStringTag` from the imminent ES2015 edition ([notes](https://github.com/tc39/notes/blob/8711614630f631cb51dfb803caa087bedfc051a3/meetings/2015-01/jan-28.md#45-tostringtag)), the committee agreed (although unfortunately this was not captured in the notes) that as long as builtins offered a method (prototype or static) that checked internal slots, and threw an exception when the internal slots were not found, this would suffice as a brand check.
+
+### Specification Details
+Which specifications are affected by this invariant? How do we detect violations?
+
+### Known Violations
 
 <sub>The only exception to this, unknown at the time, is Error (and associated Error subclasses) - `Error.isError` was [proposed](https://github.com/tc39/notes/blob/8711614630f631cb51dfb803caa087bedfc051a3/meetings/2016-03/march-29.md#erroriserror) to fix this, but rejected in favor of brand checks inside the [stacks proposal](https://github.com/tc39/proposal-error-stacks).</sub>
 
+### Rationale : Why did we have this invariant?
+
+TODO
+
 ## Cannot access partially initialized literals
 
+### Description : A long, full description of the invariant and it's purpose
 ECMAScript initializes properties ad-hoc per spec, but we never expose partially initialized literals...
 
 This affects things like literals defining get/set pairs and avoiding them being seen as partially initialized.
@@ -28,7 +39,17 @@ var obj = {
 }
 ```
 
-Motivation: Developer Mental Model.
+### Specification Details : Which specifications are affected by this invariant
+
+TODO
+
+### Known Violations
+
+None
+
+### Rationale : Why did we have this invariant?
+
+Developer Mental Model.
 
 This invariant makes it seem as if both [[Get]] and [[Set]] are populated at the same time. It greatly simplifies how to think about objects and avoids forcing defensive programming against partially initialized objects.
 
@@ -36,8 +57,18 @@ This invariant makes it seem as if both [[Get]] and [[Set]] are populated at the
 
 The language is implementable independantly of the web platform.
 
-Motivation: ECMAScript is useful for many applications beyond the web, including on
-microcontrollers.
+### Specification Details : Which specifications are affected by this invariant
+
+TODO
+
+### Known Violations
+
+None
+
+### Rationale : Why did we have this invariant?
+
+ECMAScript is useful for many applications beyond the web, including on microcontrollers. By
+maintaining this invariant, we achieve the goal of maintaining a single language.
 
 ## Prototype of (async) iterators
 
@@ -45,13 +76,15 @@ When a built-in function creates an iterator, it should specify its prototype to
 
 Every %FooIteratorPrototype% should have %IteratorPrototype% on its prototype chain when it's created.
 
-### Violatons
+### Known Violatons
 
 None so far
 
 ### Rationale
 
 Make Iterator Helpers work for all built-in iterators. (initial discussion [tc39/ecma262#2045](https://github.com/tc39/ecma262/pull/2045#issuecomment-664992764))
+
+TODO (likely there is more rational here
 
 # Known Landmines, "shoulds"
 
@@ -222,4 +255,5 @@ Template
 ## Title
 ### Description : A long, full description of the invariant and it's purpose
 ### Specification Details : Which specifications are affected by this invariant
+### Known Violations
 ### Rationale : Why did we have this invariant?
