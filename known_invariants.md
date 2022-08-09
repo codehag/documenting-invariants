@@ -284,6 +284,22 @@ TODO
 
 ----
 
+## Avoid / Hide WTF-16
+### Description : A long, full description of the invariant and it's purpose
+
+Although JavaScript strings are technically WTF-16, newer JavaScript language features try to avoid exposing this, instead working on the basis of Unicode code points. Examples include: the introduction of the code-point-based String[Symbol.iterator](); the API codePointAt() to replace charAt(); the API fromCodePoint() to replace fromCharCode(). There's even Intl.Segmenter APIs to get grapheme-cluster-based measurements (e.g. counting the number of characters).
+
+### Specification Details : Which specifications are affected by this invariant
+
+
+### Known Violations
+
+Older APIs do not hide WTF-16 encoding behavior.
+
+### Rationale : Why did we have this invariant?
+
+WTF-16 behavior is surprising. We want to avoid surprises.
+
 Template
 
 ## Title
