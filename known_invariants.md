@@ -39,6 +39,20 @@ The language is implementable independantly of the web platform.
 Motivation: ECMAScript is useful for many applications beyond the web, including on
 microcontrollers.
 
+## Prototype of (async) iterators
+
+When a built-in function creates an iterator, it should specify its prototype to be either %IteratorPrototype% or some %FooIteratorPrototype%.
+
+Every %FooIteratorPrototype% should have %IteratorPrototype% on its prototype chain when it's created.
+
+### Violatons
+
+None so far
+
+### Rationale
+
+Make Iterator Helpers work for all built-in iterators. (initial discussion [tc39/ecma262#2045](https://github.com/tc39/ecma262/pull/2045#issuecomment-664992764))
+
 # Known Landmines, "shoulds"
 
 ## Hazard of "Exotic" internal slots
