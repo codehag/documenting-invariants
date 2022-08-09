@@ -32,6 +32,12 @@ Motivation: Developer Mental Model.
 
 This invariant makes it seem as if both [[Get]] and [[Set]] are populated at the same time. It greatly simplifies how to think about objects and avoids forcing defensive programming against partially initialized objects.
 
+## General Purpose Language
+
+The language is implementable independantly of the web platform.
+
+Motivation: ECMAScript is useful for many applications beyond the web, including on
+microcontrollers.
 
 # Known Landmines, "shoulds"
 
