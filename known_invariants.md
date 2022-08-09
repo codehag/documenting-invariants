@@ -9,6 +9,30 @@ Prior to ES6, `Object.prototype.toString.call` was used as a brand-checking mech
 
 <sub>The only exception to this, unknown at the time, is Error (and associated Error subclasses) - `Error.isError` was [proposed](https://github.com/tc39/notes/blob/8711614630f631cb51dfb803caa087bedfc051a3/meetings/2016-03/march-29.md#erroriserror) to fix this, but rejected in favor of brand checks inside the [stacks proposal](https://github.com/tc39/proposal-error-stacks).</sub>
 
+## Cannot access partially initialized literals
+
+ECMAScript initializes properties ad-hoc per spec, but we never expose partially initialized literals...
+
+This affects things like literals defining get/set pairs and avoiding them being seen as partially initialized.
+
+```js
+var _ = 0;
+var obj = {
+  get field() { return _; }
+  // ...
+  // No possible code can get a Reference to obj.field , so cannot see that set is not yet applied
+  // The following line is not possible in this location (accessing `obj` prior to `set`)
+  other: getRefToObjEarly().field = 1,
+  // ...
+  set field(v) { return _ = v; }
+}
+```
+
+Motivation: Developer Mental Model.
+
+This invariant makes it seem as if both [[Get]] and [[Set]] are populated at the same time. It greatly simplifies how to think about objects and avoids forcing defensive programming against partially initialized objects.
+
+
 # Known Landmines, "shoulds"
 
 ## Hazard of "Exotic" internal slots
