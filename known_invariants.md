@@ -1,6 +1,7 @@
 # Known Invariants, "musts"
 
-The purpose of this document is to collect invariants that we know.
+The purpose of this document is to collect invariants that we know. These are not "agreed"
+invariants. Those need to be discussed and integrated in the spec.
 
 ## Built-in objects must provide brand checks
 
