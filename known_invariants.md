@@ -86,6 +86,40 @@ Make Iterator Helpers work for all built-in iterators. (initial discussion [tc39
 
 TODO (likely there is more rational here
 
+## Maintain the integrity of information contained in scopes currently offered by "use strict"
+### Description : A long, full description of the invariant and it's purpose
+
+Strict mode created a new invariant worth protecting. The erasure of arguments.caller sealed a leak of information from dynamic scope.
+
+Strict mode also nixed the arguments property of functions. That eliminated both a reëntrancy hazard and leakage of dynamic scope.
+
+```js
+function foo() {
+  console.log(bar.arguments);
+  // [10]
+}
+
+function bar(a) {
+  foo();
+}
+
+bar(10);
+```
+
+This invariant is important in evaluating future proposals for a stack trace API and any implicit context propagation proposals.
+
+### Specification Details : Which specifications are affected by this invariant
+
+Any specification impacted by "use strict"
+
+### Known Violations
+
+JS outside of "use strict"
+
+### Rationale : Why did we have this invariant?
+
+A program that involves parties Alice, Bob, Carol, and Dave, Alice should be able to pass an object from Dave to Bob by calling a function. Bob should then be able to call a function of Carol but should not be able to eavesdrop on the arguments Alice passed to Bob, and thereby gain access to the object from Dave.
+
 # Known Landmines, "shoulds"
 
 ## Hazard of "Exotic" internal slots
