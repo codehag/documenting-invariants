@@ -59,6 +59,24 @@ Older APIs do not hide WTF-16 encoding behavior.
 
 WTF-16 behavior is surprising. We want to avoid surprises.
 
+## new Array methods treat holes as undefined instead of skipping them
+### Description : A long, full description of the invariant and it's purpose
+
+TODO
+
+### Specification Details : Which specifications are affected by this invariant
+
+* [23.1.3 Properties of the Array Prototype Object](https://tc39.es/ecma262/#sec-properties-of-the-array-prototype-object)
+
+### Known Violations
+
+* old Array methods would check for presence before doing a Get
+
+### Rationale : Why did we have this design principle?
+
+The language has no exposed concept of a `hole`, but it already has two nullish values. Introducing
+a third is not useful, and old APIs had surprising behaviors for users.
+
 ----
 
 # Template
