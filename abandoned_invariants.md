@@ -136,8 +136,9 @@ Find documentation
 
 ----
 
-Template
+# Template
 
+```markdown
 ## Title
 
 ### Description
@@ -148,3 +149,4 @@ Template
 
 ### Documentation
 
+```
