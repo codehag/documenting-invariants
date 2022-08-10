@@ -7,8 +7,10 @@ assignees: codehag
 
 ---
 
-## Title
-<!-- add a descriptive title -->
+## Quick facts
+
+* Title: <!-- Title -->
+* Must or should? <!-- pick one. if there are violations that can not be restricted to a well defined portion of the spec (such as use-strict) then this will be a should. If this is a new constraint that should be respected in the future, or it cannot be recorded in the specification, create a design principle. -->
 
 ## Long form description
 <!-- add long form description of the invariant, what it is used for, possibly with samples -->
