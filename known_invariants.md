@@ -120,6 +120,24 @@ JS outside of "use strict"
 
 A program that involves parties Alice, Bob, Carol, and Dave, Alice should be able to pass an object from Dave to Bob by calling a function. Bob should then be able to call a function of Carol but should not be able to eavesdrop on the arguments Alice passed to Bob, and thereby gain access to the object from Dave.
 
+## Strict Equality is Never Side-effecting
+
+### Description : A long, full description of the invariant and it's purpose
+
+If evaluating a and b independently has no side effects, then evaluating a === b doesn't either.
+
+### Specification Details : Which specifications are affected by this invariant
+
+* [IsStrictlyEqual](https://tc39.es/ecma262/#sec-isstrictlyequal)
+
+### Known Violations
+
+None
+
+### Rationale : Why did we have this invariant?
+
+we want to avoid surprising behavior during strict equality operations
+
 # Known Landmines, "shoulds"
 
 ## Hazard of "Exotic" internal slots
